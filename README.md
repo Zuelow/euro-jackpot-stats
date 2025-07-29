@@ -47,7 +47,7 @@ A beautiful, interactive multilingual website that visualizes Euro Jackpot lotte
 
 ## 🚀 Live Demo
 
-**[View Live Website](https://your-username.github.io/euro-jackpot-stats)**
+**[View Live Website](https://zuelow.github.io/euro-jackpot-stats/)**
 
 ## 🛠️ Quick Start
 
