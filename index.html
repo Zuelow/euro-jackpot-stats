@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euro Jackpot Stats - Your Chances Revealed</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="translations.js"></script>
+    <script src="language-manager.js"></script>
+</head>
+<body>
+    <!-- Language Toggler -->
+    <div class="language-toggler">
+        <button class="language-btn" id="languageToggler">
+            <span class="current-flag" id="currentFlag">🇬🇧</span>
+            <span class="current-lang" id="currentLang">English</span>
+            <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" data-lang="en" data-flag="🇬🇧">🇬🇧 English</div>
+            <div class="language-option" data-lang="hr" data-flag="🇭🇷">🇭🇷 Hrvatski</div>
+            <div class="language-option" data-lang="cs" data-flag="🇨🇿">🇨🇿 Čeština</div>
+            <div class="language-option" data-lang="da" data-flag="🇩🇰">🇩🇰 Dansk</div>
+            <div class="language-option" data-lang="et" data-flag="🇪🇪">🇪🇪 Eesti</div>
+            <div class="language-option" data-lang="fi" data-flag="🇫🇮">🇫🇮 Suomi</div>
+            <div class="language-option" data-lang="de" data-flag="🇩🇪">🇩🇪 Deutsch</div>
+            <div class="language-option" data-lang="el" data-flag="🇬🇷">🇬🇷 Ελληνικά</div>
+            <div class="language-option" data-lang="hu" data-flag="🇭🇺">🇭🇺 Magyar</div>
+            <div class="language-option" data-lang="is" data-flag="🇮🇸">🇮🇸 Íslenska</div>
+            <div class="language-option" data-lang="it" data-flag="🇮🇹">🇮🇹 Italiano</div>
+            <div class="language-option" data-lang="lv" data-flag="🇱🇻">🇱🇻 Latviešu</div>
+            <div class="language-option" data-lang="lt" data-flag="🇱🇹">🇱🇹 Lietuvių</div>
+            <div class="language-option" data-lang="nl" data-flag="🇳🇱">🇳🇱 Nederlands</div>
+            <div class="language-option" data-lang="no" data-flag="🇳🇴">🇳🇴 Norsk</div>
+            <div class="language-option" data-lang="pl" data-flag="🇵🇱">🇵🇱 Polski</div>
+            <div class="language-option" data-lang="sk" data-flag="🇸🇰">🇸🇰 Slovenčina</div>
+            <div class="language-option" data-lang="sl" data-flag="🇸🇮">🇸🇮 Slovenščina</div>
+            <div class="language-option" data-lang="es" data-flag="🇪🇸">🇪🇸 Español</div>
+            <div class="language-option" data-lang="sv" data-flag="🇸🇪">🇸🇪 Svenska</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title" data-translate="hero.title">Euro Jackpot Statistics</h1>
+                <p class="hero-subtitle" data-translate="hero.subtitle">Discover the mind-blowing odds and fascinating data behind Europe's biggest lottery</p>
+                <div class="odds-highlight">
+                    <span class="odds-number">1 in 139,838,160</span>
+                    <span class="odds-text" data-translate="hero.odds">chance of winning the jackpot</span>
+                </div>
+            </div>
+            <div class="floating-numbers">
+                <div class="number-ball">7</div>
+                <div class="number-ball">23</div>
+                <div class="number-ball">42</div>
+                <div class="number-ball">1</div>
+                <div class="number-ball">9</div>
+            </div>
+        </header>
+
+        <!-- Odds Visualization Section -->
+        <section class="odds-section">
+            <h2 data-translate="sections.oddsTitle">How Small Are Your Chances?</h2>
+            <div class="odds-grid">
+                <div class="odds-card">
+                    <h3 data-translate="odds.morelikely">Things More Likely Than Winning</h3>
+                    <ul class="odds-list">
+                        <li><span data-translate="odds.lightning">Being struck by lightning</span>: <span>1 in 1,000,000</span></li>
+                        <li><span data-translate="odds.moviestar">Becoming a movie star</span>: <span>1 in 1,505,000</span></li>
+                        <li><span data-translate="odds.supermodel">Dating a supermodel</span>: <span>1 in 88,000</span></li>
+                        <li><span data-translate="odds.astronaut">Becoming an astronaut</span>: <span>1 in 12,100,000</span></li>
+                        <li><span data-translate="odds.clover">Finding a four-leaf clover</span>: <span>1 in 10,000</span></li>
+                        <li><span data-translate="odds.shark">Being attacked by a shark</span>: <span>1 in 11,500,000</span></li>
+                    </ul>
+                    <div class="odds-multiplier">
+                        <p><strong data-translate="odds.multiplier">Euro Jackpot is 140× less likely than being struck by lightning!</strong></p>
+                    </div>
+                </div>
+                <div class="odds-card visual-card">
+                    <h3 data-translate="odds.visualized">Your Odds Visualized</h3>
+                    <div class="odds-visual">
+                        <div class="pixel-grid" id="pixelGrid"></div>
+                        <p class="pixel-explanation" data-translate="odds.explanation">Each dot represents 250,000 people. The red dot shows your 1-in-140-million chance!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Odds Comparisons -->
+            <div class="odds-comparisons">
+                <h3 data-translate="odds.perspective">Put It In Perspective</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <div class="comparison-icon">⚡</div>
+                        <div class="comparison-text">
+                            <strong data-translate="comparisons.lightning">Lightning Strike</strong><br>
+                            <span data-translate="comparisons.lightningOdds">140× more likely than jackpot</span>
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🦈</div>
+                        <div class="comparison-text">
+                            <strong>Shark Attack</strong><br>
+                            12× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🚀</div>
+                        <div class="comparison-text">
+                            <strong>Becoming an Astronaut</strong><br>
+                            12× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🎬</div>
+                        <div class="comparison-text">
+                            <strong>Becoming Famous</strong><br>
+                            93× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">☄️</div>
+                        <div class="comparison-text">
+                            <strong>Hit by Meteorite</strong><br>
+                            700× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">👑</div>
+                        <div class="comparison-text">
+                            <strong>Becoming Royalty</strong><br>
+                            4,661× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🍀</div>
+                        <div class="comparison-text">
+                            <strong>Four-Leaf Clover</strong><br>
+                            13,984× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🎲</div>
+                        <div class="comparison-text">
+                            <strong>Rolling 20 Sixes</strong><br>
+                            4× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🏆</div>
+                        <div class="comparison-text">
+                            <strong>Olympic Gold Medal</strong><br>
+                            23,306× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">💎</div>
+                        <div class="comparison-text">
+                            <strong>Finding a Diamond</strong><br>
+                            1,398× more likely than jackpot
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🎯</div>
+                        <div class="comparison-text">
+                            <strong>Your Lottery Odds</strong><br>
+                            1 in 139,838,160
+                        </div>
+                    </div>
+                    <div class="comparison-item highlight-odds">
+                        <div class="comparison-icon">🤯</div>
+                        <div class="comparison-text">
+                            <strong>Mind-Blowing Fact</strong><br>
+                            You're more likely to flip 27 coins and get all heads!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extreme Comparisons Section -->
+                <div class="extreme-comparisons">
+                    <h4 data-translate="extremeComparisons.title">Even More Ridiculous Comparisons</h4>
+                    <div class="extreme-grid">
+                        <div class="extreme-item">
+                            <span class="extreme-number">⚡</span>
+                            <p data-translate="extremeComparisons.lightning7">You're more likely to be <strong>struck by lightning 140 times</strong> than win the jackpot</p>
+                        </div>
+                        <div class="extreme-item">
+                            <span class="extreme-number">🪙</span>
+                            <p data-translate="extremeComparisons.coins27">You could <strong>flip a coin 27 times</strong> and get all heads more easily (1 in 134 million)</p>
+                        </div>
+                        <div class="extreme-item">
+                            <span class="extreme-number">🎯</span>
+                            <p data-translate="extremeComparisons.combinations">There are <strong>139,838,160 possible combinations</strong> - you need the exact one!</p>
+                        </div>
+                        <div class="extreme-item">
+                            <span class="extreme-number">🌍</span>
+                            <p data-translate="extremeComparisons.russia">If everyone in <strong>Russia bought a ticket</strong>, only 1 person would win</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Results Section -->
+        <section class="results-section">
+            <h2 data-translate="sections.latestResults">Latest Results</h2>
+            <div class="results-container">
+                <div class="latest-draw">
+                    <h3 data-translate="results.todaysDraw">Today's Draw</h3>
+                    <div class="draw-date" id="latestDate">Loading...</div>
+                    <div class="numbers-display">
+                        <div class="main-numbers" id="mainNumbers">
+                            <!-- Numbers will be populated by JavaScript -->
+                        </div>
+                        <div class="euro-numbers" id="euroNumbers">
+                            <!-- Euro numbers will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="jackpot-amount" id="jackpotAmount">Loading...</div>
+                    <div class="draw-disclaimer">
+                        <small>* Simulated draw for demonstration purposes. For official results, visit <a href="https://www.veikkaus.fi" target="_blank">Veikkaus.fi</a></small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Dashboard -->
+        <section class="stats-section">
+            <h2 data-translate="sections.statsTitle">Number Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 data-translate="stats.frequentNumbers">Most Frequent Numbers</h3>
+                    <canvas id="frequencyChart"></canvas>
+                </div>
+                <div class="stat-card">
+                    <h3 data-translate="stats.jackpotHistory">Jackpot History</h3>
+                    <canvas id="jackpotChart"></canvas>
+                </div>
+                <div class="stat-card">
+                    <h3 data-translate="stats.heatMap">Number Heat Map</h3>
+                    <div class="heatmap" id="numberHeatmap"></div>
+                </div>
+                <div class="stat-card">
+                    <h3 data-translate="stats.funFacts">Fun Facts</h3>
+                    <div class="fun-facts">
+                        <div class="fact">
+                            <span class="fact-number" id="totalDraws">0</span>
+                            <span class="fact-label" data-translate="stats.totalDraws">Total Draws</span>
+                        </div>
+                        <div class="fact">
+                            <span class="fact-number" id="biggestJackpot">€0</span>
+                            <span class="fact-label" data-translate="stats.biggestJackpot">Biggest Jackpot</span>
+                        </div>
+                        <div class="fact">
+                            <span class="fact-number" id="averageJackpot">€0</span>
+                            <span class="fact-label" data-translate="stats.averageJackpot">Average Jackpot</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reality Check Section -->
+        <section class="reality-section">
+            <h2 data-translate="sections.realWinnersTitle">The Real Winners 💰</h2>
+            <div class="reality-content">
+                <div class="reality-card main-reality">
+                    <h3 data-translate="reality.whoWins">🎯 Who Actually Wins?</h3>
+                    <div class="winner-breakdown">
+                        <div class="winner-item">
+                            <div class="winner-icon">🏢</div>
+                            <div class="winner-text">
+                                <strong data-translate="reality.lotteryCompanies">Lottery Companies</strong>
+                                <p data-translate="reality.keepPercent">Keep ~50% of all ticket sales</p>
+                            </div>
+                        </div>
+                        <div class="winner-item">
+                            <div class="winner-icon">📺</div>
+                            <div class="winner-text">
+                                <strong data-translate="reality.marketingAgencies">Marketing Agencies</strong>
+                                <p data-translate="reality.marketingContracts">Millions in advertising contracts</p>
+                            </div>
+                        </div>
+                        <div class="winner-item">
+                            <div class="winner-icon">🏛️</div>
+                            <div class="winner-text">
+                                <strong data-translate="reality.government">Government</strong>
+                                <p data-translate="reality.taxes">Taxes and "good causes" funding</p>
+                            </div>
+                        </div>
+                        <div class="winner-item loser">
+                            <div class="winner-icon">😢</div>
+                            <div class="winner-text">
+                                <strong data-translate="reality.player">You (The Player)</strong>
+                                <p data-translate="reality.losePercent">Lose ~50% of money spent</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reality-card">
+                    <h3>💸 The Marketing Machine</h3>
+                    <div class="marketing-facts">
+                        <div class="fact-item">
+                            <span class="fact-number">€50M+</span>
+                            <span class="fact-label">Annual advertising spend</span>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-number">24/7</span>
+                            <span class="fact-label">TV, radio, online ads</span>
+                        </div>
+                        <div class="fact-item">
+                            <span class="fact-number">🎭</span>
+                            <span class="fact-label">"You could be next!" messaging</span>
+                        </div>
+                    </div>
+                    <p class="marketing-truth">
+                        <strong>The Truth:</strong> Marketing agencies make millions creating ads that make you forget the math.
+                        They're the real jackpot winners - guaranteed profit from every campaign!
+                    </p>
+                </div>
+
+                <div class="reality-card">
+                    <h3>🧮 The House Edge</h3>
+                    <div class="house-edge-visual">
+                        <div class="money-flow">
+                            <div class="money-in">
+                                <span class="amount">€100</span>
+                                <span class="label">You Pay</span>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="money-split">
+                                <div class="split-item">
+                                    <span class="amount">€50</span>
+                                    <span class="label">Prize Pool</span>
+                                </div>
+                                <div class="split-item profit">
+                                    <span class="amount">€50</span>
+                                    <span class="label">House Profit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="house-truth">
+                            For every €100 spent on tickets, only €50 goes to prizes.
+                            The house <em>always</em> wins 50% - that's their business model!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Section -->
+        <section class="interactive-section">
+            <h2 data-translate="sections.interactiveTitle">Try Your Luck (Virtually)</h2>
+            <div class="number-generator">
+                <button id="generateNumbers" class="generate-btn" data-translate="interactive.generateBtn">Generate Random Numbers</button>
+                <div class="generated-numbers" id="generatedNumbers"></div>
+                <div class="simulation-results" id="simulationResults"></div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p data-translate="footer.dataSource">Data sourced from Veikkaus.fi | Built for educational purposes</p>
+            <p class="disclaimer" data-translate="footer.disclaimer">Remember: Gambling can be addictive. Play responsibly.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
